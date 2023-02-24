@@ -5,7 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-    Book name: <input type="text" name="book_name" id="book_name">
-    <button id="btn">Submit</button>
+
+    {{range .result}}
+      {{.ID}}) {{.Title}} ----------> {{.Author}}
+    <form method="post" action="/deleteBooks">
+        <input type="hidden" name="id" value="{{.ID}}">
+        <input type="submit" value="delete" name="delete">
+    </form>
+    <form method="get" action="/updateBooks">
+        <input type="hidden" name="id" value="{{.ID}}">
+        <input type="submit" value="update" name="update">
+    </form>
+    <br>
+    {{end}}
+
 </body>
 </html>
