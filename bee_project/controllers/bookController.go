@@ -41,7 +41,7 @@ type BookController struct {
 //}
 
 func (book *BookController) ShowAllBooks() {
-	var books []models.Books
+	var books []models.Book
 
 	initializers.DB.Find(&books)
 
@@ -53,7 +53,7 @@ func (manageBook *BookController) CreateBooks() {
 	if manageBook.Ctx.Input.IsPost() {
 		bookTitle := manageBook.GetString("book_title")
 		bookAuthor := manageBook.GetString("book_author")
-		book := models.Books{Title: bookTitle, Author: bookAuthor}
+		book := models.Book{Title: bookTitle, Author: bookAuthor}
 
 		result := initializers.DB.Create(&book)
 		if result.Error != nil {
@@ -70,7 +70,7 @@ func (manageBook *BookController) DeleteBooks() {
 	if manageBook.Ctx.Input.IsPost() {
 		bookId, _ := strconv.Atoi(manageBook.GetString("id"))
 
-		var book models.Books
+		var book models.Book
 
 		initializers.DB.Where("id = ?", bookId).Delete(&book)
 		manageBook.Redirect("/showBooks", 302)
@@ -84,7 +84,7 @@ func (manageBook *BookController) UpdateBooks() {
 		bookTitle := manageBook.GetString("book_title")
 		bookAuthor := manageBook.GetString("book_author")
 
-		result := initializers.DB.Model(&models.Books{}).Where("id = ?",
+		result := initializers.DB.Model(&models.Book{}).Where("id = ?",
 			bookId).Updates(map[string]interface{}{"title": bookTitle, "author": bookAuthor})
 
 		if result.Error != nil {
@@ -96,7 +96,7 @@ func (manageBook *BookController) UpdateBooks() {
 	} else {
 		bookId, _ := strconv.Atoi(manageBook.GetString("id"))
 
-		var book models.Books
+		var book models.Book
 
 		initializers.DB.Where("id = ?", bookId).First(&book)
 
