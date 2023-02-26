@@ -21,6 +21,7 @@ func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDB()
 	initializers.OfficeConnector()
+	initializers.SessionConnect()
 }
 
 func main() {

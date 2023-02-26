@@ -6,6 +6,7 @@ import (
 )
 
 func init() {
-	beego.Router("/register", &controllers.PersonController{}, "get,post:CreatePerson")
-	beego.Router("/login", &controllers.PersonController{}, "get,post:LoginPerson")
+	//beego.Router("/register", &controllers.PersonController{}, "get,post:CreatePerson")
+	//beego.Router("/login", &controllers.PersonController{}, "get,post:LoginPerson")
+	beego.Router("/auth", &controllers.PersonController{}, "get,post:Auth")
 }

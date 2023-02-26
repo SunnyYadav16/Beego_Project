@@ -5,17 +5,23 @@ import (
 	"fmt"
 )
 
-func OfficeConnector() {
+func OfficeConnector() string {
 	graphHelper := utils.NewGraphHelper()
 	initializeGraph(graphHelper)
 
 	user, userError := graphHelper.GetUser()
-	utils.CheckError("Error Getting User! ", userError)
+	if userError != nil {
+		utils.CheckError("Error Getting User! ", userError)
+	}
 	fmt.Println(*user.GetDisplayName())
 
 	token, tokenError := graphHelper.GetUserToken()
-	utils.CheckError("Error Getting Token! ", tokenError)
-	fmt.Println(*token)
+	if tokenError != nil {
+		utils.CheckError("Error Getting Token! ", tokenError)
+	}
+	//fmt.Println(*token)
+
+	return *token
 }
 
 func initializeGraph(graphHelper *utils.GraphHelper) {
